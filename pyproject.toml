@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "wb-bot"
+version = "0.1.0"
+description = ""
+authors = ["DenisKhudyakov <denis.hudyakov27@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.32.3"
+pytest = "^8.3.2"
+bs4 = "^0.0.2"
+lxml = "^5.3.0"
+selenium = "^4.23.1"
+celery = "^5.4.0"
+redis = "^5.0.8"
+python-dotenv = "^1.0.1"
+pytelegrambotapi = "^4.22.1"
+
+
+[tool.poetry.group.lint.dependencies]
+black = "^24.8.0"
+isort = "^5.13.2"
+mypy = "^1.11.1"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
