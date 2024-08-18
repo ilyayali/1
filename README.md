@@ -20,7 +20,7 @@
 		1) Установите Python и Poetry если они не установлены.
             https://www.python.org/
             https://python-poetry.org/docs/#installation
-		2) Клонируйте репозиторий 
+		2) Клонируйте репозиторий git@github.com:DenisKhudyakov/parser_wb.git
 		3) Активируйте виртульное окружение командой "poetry shell"
 		4) Установите пакеты командой "poetry install"
 		5) Создайте вашего бота в телеграмм, получите токен и введите его в .env файл
