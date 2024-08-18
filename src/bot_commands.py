@@ -18,7 +18,7 @@ def bot_help(message: Message):
 @bot.message_handler(commands=["products"])
 def bot_products(message: Message):
     args = message.text.split()
-    if len(args) < 1:
+    if len(args) == 1:
         bot.reply_to(message, "Введите название категории")
         return
     category_name = args[1:]
