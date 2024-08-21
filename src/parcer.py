@@ -58,6 +58,23 @@ def get_catalogs_wb() -> list:
     return data_list
 
 
+def get_categorise() -> dict:
+    """
+    Функция получения всех категорий из каталога WB
+    :return: dict('category_name': ['child_category_name',], )
+    """
+    url = "https://static-basket-01.wbbasket.ru/vol0/data/main-menu-ru-ru-v3.json"
+    response = requests.get(url)
+    data = response.json()
+    category_dict = {}
+    for d in data:
+        try:
+            sub_category_name = [sub_cat['name'] for sub_cat in d["childs"]]
+            category_dict[d["name"]] = sub_category_name
+        except KeyError:
+            continue
+    return category_dict
+
 def search_category_in_catalog(url: str, catalog_list: list):
     try:
         for catalog in catalog_list:
@@ -119,4 +136,4 @@ def get_feedbackPoints_and_total_price() -> Generator[int, float, int | dict]:
 
 
 if __name__ == "__main__":
-    print(next(get_feedbackPoints_and_total_price()))
+    print(get_categorise())

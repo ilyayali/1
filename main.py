@@ -1,5 +1,5 @@
 from src.bot import bot
-from src.bot_commands import bot_start, bot_help, bot_products
+from src.bot_commands import *
 
 
 if __name__ == "__main__":
