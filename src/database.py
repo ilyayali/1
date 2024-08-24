@@ -16,8 +16,6 @@ class Database:
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
-        if exc_type or exc_val or exc_tb:
-            print(f"Возникало исключение: {exc_val|exc_type|exc_tb}")
         if self.connection:
             self.connection.commit()
             self.connection.close()
@@ -69,4 +67,4 @@ class Database:
             (category_name,),
         )
         products = self.cursor.fetchall()
-        return await products
+        return products

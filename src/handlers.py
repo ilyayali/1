@@ -33,7 +33,7 @@ async def bot_products(message: types.Message):
         return
     category_name = " ".join(args[1:])
     async with Database('data.db') as db:
-        products = db.filter_product(category_name)
+        products = await db.filter_product(category_name)
         text = [f'https://www.wildberries.ru/catalog/{data[0]}/detail.aspx' for data in products]
         await message.answer(f"Найдены товары с кэшбэком в категории {category_name}\n" + "\n".join(text))
 
@@ -59,6 +59,6 @@ async def callback_product(call: types.CallbackQuery):
     """Функция вывода товаров с кэшбэком через кнопку"""
     subcategory = call.data.split('_')[1]
     async with Database('data.db') as db:
-        products = db.filter_product(subcategory)
+        products = await db.filter_product(subcategory)
         text = [f'https://www.wildberries.ru/catalog/{data[0]}/detail.aspx' for data in products]
         await call.message.answer(f"Найдены товары с кэшбэком в категории {subcategory}\n" + "\n".join(text))
