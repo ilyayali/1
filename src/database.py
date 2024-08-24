@@ -1,3 +1,4 @@
+import asyncio
 import sqlite3
 
 
@@ -9,19 +10,19 @@ class Database:
         self.connection = None
         self.cursor = None
 
-    def __enter__(self) -> None:
+    async def __aenter__(self) -> None:
         self.connection = sqlite3.connect(self.db_name)
         self.cursor = self.connection.cursor()
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
         if exc_type or exc_val or exc_tb:
             print(f"Возникало исключение: {exc_val|exc_type|exc_tb}")
         if self.connection:
             self.connection.commit()
             self.connection.close()
 
-    def create_table(self) -> None:
+    async def create_table(self) -> None:
         """Функция создания таблицы"""
         # Удаляем таблицу, если она уже существует
         self.cursor.execute("DROP TABLE IF EXISTS products_wb")
@@ -41,7 +42,7 @@ class Database:
         )
         self.connection.commit()
 
-    def insert_product(self, product: dict) -> None:
+    async def insert_product(self, product: dict) -> None:
         """Функция добавления товара в БД"""
         self.cursor.execute(
             f"""
@@ -60,7 +61,7 @@ class Database:
         )
         self.connection.commit()
 
-    def filter_product(self, category_name: str) -> tuple:
+    async def filter_product(self, category_name: str) -> tuple:
         """Функция фильтрации товаров по категории"""
         self.cursor.execute(
             f"""
@@ -68,4 +69,4 @@ class Database:
             (category_name,),
         )
         products = self.cursor.fetchall()
-        return products
+        return await products
