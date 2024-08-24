@@ -16,6 +16,6 @@ async def sub_catalog_keyboard(catalog_name: str):
     keyboard = InlineKeyboardBuilder()
     sub_catalog = catalog.get(catalog_name, [])
     for sub_cat in sub_catalog:
-        keyboard.add(InlineKeyboardButton(text=sub_cat, callback_data=f'subcat_{sub_cat}'))
+        keyboard.add(InlineKeyboardButton(text=sub_cat, callback_data=f'subcat_{sub_cat[:10]}'))
     return keyboard.adjust(2).as_markup()
 
