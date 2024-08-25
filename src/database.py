@@ -1,4 +1,3 @@
-import asyncio
 import sqlite3
 
 
@@ -10,17 +9,17 @@ class Database:
         self.connection = None
         self.cursor = None
 
-    async def __aenter__(self) -> None:
+    def __enter__(self) -> None:
         self.connection = sqlite3.connect(self.db_name)
         self.cursor = self.connection.cursor()
         return self
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         if self.connection:
             self.connection.commit()
             self.connection.close()
 
-    async def create_table(self) -> None:
+    def create_table(self) -> None:
         """Функция создания таблицы"""
         # Удаляем таблицу, если она уже существует
         self.cursor.execute("DROP TABLE IF EXISTS products_wb")
@@ -40,7 +39,7 @@ class Database:
         )
         self.connection.commit()
 
-    async def insert_product(self, product: dict) -> None:
+    def insert_product(self, product: dict) -> None:
         """Функция добавления товара в БД"""
         self.cursor.execute(
             f"""
@@ -59,7 +58,7 @@ class Database:
         )
         self.connection.commit()
 
-    async def filter_product(self, category_name: str) -> tuple:
+    def filter_product(self, category_name: str) -> tuple:
         """Функция фильтрации товаров по категории"""
         self.cursor.execute(
             f"""

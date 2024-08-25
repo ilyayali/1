@@ -11,11 +11,11 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 
 # Путь к ChromeDriver, по умолчанию /usr/lib/chromium-browser/chromedriver, необходимо указать свой
-SERVICE = Service('/usr/lib/chromium-browser/chromedriver')
+SERVICE = Service("/usr/lib/chromium-browser/chromedriver")
 DRIVER = webdriver.Chrome(service=SERVICE, options=chrome_options)
 WAIT = WebDriverWait(DRIVER, 10)
 
-BASE_URL = 'https://www.wildberries.ru/catalog/{id_product}/detail.aspx'
+BASE_URL = "https://www.wildberries.ru/catalog/{id_product}/detail.aspx"
 
 
 def find_element_with_retry(url: str, retries: int = 3) -> set | list:
@@ -30,8 +30,16 @@ def find_element_with_retry(url: str, retries: int = 3) -> set | list:
     while attempts < retries:
         try:
             DRIVER.get(url)
-            wallet_price = WAIT.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'price-block__wallet-price')))
-            feedback_points = WAIT.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'feedbacks-points-sum')))
+            wallet_price = WAIT.until(
+                EC.presence_of_all_elements_located(
+                    (By.CLASS_NAME, "price-block__wallet-price")
+                )
+            )
+            feedback_points = WAIT.until(
+                EC.presence_of_all_elements_located(
+                    (By.CLASS_NAME, "feedbacks-points-sum")
+                )
+            )
             for wallet_price in wallet_price:
                 cash_back_and_price.add(wallet_price.text[:-2])
             for feedback_point in feedback_points:
@@ -46,7 +54,10 @@ def find_element_with_retry(url: str, retries: int = 3) -> set | list:
             DRIVER.quit()
     return []
 
-if __name__ == '__main__':
-    print(find_element_with_retry("https://www.wildberries.ru/catalog/226986621/detail.aspx"))
 
-
+if __name__ == "__main__":
+    print(
+        find_element_with_retry(
+            "https://www.wildberries.ru/catalog/226986621/detail.aspx"
+        )
+    )

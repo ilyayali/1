@@ -69,11 +69,12 @@ def get_categorise() -> dict:
     category_dict = {}
     for d in data:
         try:
-            sub_category_name = [sub_cat['name'] for sub_cat in d["childs"]]
+            sub_category_name = [sub_cat["name"] for sub_cat in d["childs"]]
             category_dict[d["name"]] = sub_category_name
         except KeyError:
             continue
     return category_dict
+
 
 def search_category_in_catalog(url: str, catalog_list: list):
     try:

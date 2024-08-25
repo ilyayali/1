@@ -1,6 +1,6 @@
-from src.bot import bot
-from src.bot_commands import *
+import asyncio
 
+from src.async_bot import *
 
 if __name__ == "__main__":
-    bot.infinity_polling()
+    asyncio.run(main())
