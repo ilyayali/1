@@ -17,16 +17,8 @@
 <p>Принцип работы максимально простой Celery фоново собирает данные с WB, вывод товаров с кэшбэком реализован через Телеграмм</p>
 
 	Установка и запуск:
-		1) Установите Python и Poetry если они не установлены.
-            https://www.python.org/
-            https://python-poetry.org/docs/#installation
-		2) Клонируйте репозиторий git@github.com:DenisKhudyakov/parser_wb.git
-		3) Активируйте виртульное окружение командой "poetry shell"
-		4) Установите пакеты командой "poetry install"
-		5) Создайте вашего бота в телеграмм, получите токен и введите его в .env файл
-		6) Запустите Celery Worker:
-			celery -A tasks worker --loglevel=info
-		7) Запустите Celery Beat:
-			celery -A tasks beat --loglevel=info
-		9) Запустите проект командой "python main.py"
+		1) Клонируйте репозиторий git@github.com:DenisKhudyakov/parser_wb.git
+		2) Создайте файл .env запишите в него телеграмм токен
+        3) Введите в терминале команду docker compose up
+		
 		

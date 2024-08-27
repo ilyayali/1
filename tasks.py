@@ -8,8 +8,8 @@ from src.database import Database
 from src.parcer import get_feedbackPoints_and_total_price
 
 # Настройки
-broker_url = "redis://localhost:6379/0"
-result_backend = "redis://localhost:6379/0"
+broker_url = "redis://redis:6379/0"
+result_backend = "redis://redis:6379/0"
 timezone = "UTC"
 
 app = Celery("tasks", broker=broker_url, backend=result_backend, timezone=timezone)
